@@ -16,13 +16,13 @@ function CreateTodoPage() {
     }
 
     try {
-      const response = await fetch('/api/todos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title: newTodoTitle, description: newTodoDescription }),
-      });
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/todos`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ title: newTodoTitle, description: newTodoDescription }),
+});
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

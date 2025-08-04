@@ -14,7 +14,7 @@ function TodoListPage() {
   const fetchTodos = async () => {
     try {
       setLoading(true); 
-      const response = await fetch('/api/todos');
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/todos`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -30,9 +30,9 @@ function TodoListPage() {
 
   const toggleTodo = async (id) => {
     try {
-      const response = await fetch(`/api/todos/${id}/toggle`, {
-        method: 'PUT',
-      });
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/todos/${id}/toggle`, {
+  method: 'PUT',
+});
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -47,9 +47,9 @@ function TodoListPage() {
 
   const deleteTodo = async (id) => {
     try {
-      const response = await fetch(`/api/todos/${id}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/todos/${id}`, {
+  method: 'DELETE',
+});
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
