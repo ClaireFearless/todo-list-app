@@ -1,0 +1,384 @@
+/* frontend/src/App.css - Tema Cinnamoroll */
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Indie+Flower&family=Patrick+Hand&display=swap');
+
+/* Variabel Warna Cinnamoroll */
+:root {
+  --cinnamoroll-blue: #ADD8E6; /* Light Blue */
+  --cinnamoroll-white: #FFFFFF;
+  --cinnamoroll-pink: #FFB6C1; /* Light Pink */
+  --cinnamoroll-dark-blue: #6A5ACD; /* Slate Blue */
+  --cinnamoroll-grey: #D3D3D3; /* Light Grey */
+  --cinnamoroll-shadow: rgba(173, 216, 230, 0.4); /* Shadow Blue */
+}
+
+body {
+  margin: 0;
+  font-family: 'Comfortaa', cursive;
+  background-color: var(--cinnamoroll-blue); /* Latar belakang biru muda Cinnamoroll */
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.app-container {
+  background-color: var(--cinnamoroll-white);
+  padding: 30px;
+  border-radius: 25px; /* Lebih bulat */
+  box-shadow: 0 12px 35px var(--cinnamoroll-shadow); /* Bayangan lebih lembut */
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  border: 2px solid var(--cinnamoroll-pink); /* Border pink manis */
+}
+
+.app-header h1 {
+  font-family: 'Patrick Hand', cursive; /* Font tulisan tangan yang lebih lembut */
+  color: var(--cinnamoroll-dark-blue); /* Biru gelap */
+  margin-bottom: 8px;
+  font-size: 2.8em; /* Sedikit lebih besar */
+  text-shadow: 2px 2px 6px var(--cinnamoroll-shadow);
+  letter-spacing: 1px;
+}
+
+.app-header .subtitle {
+  color: #616161;
+  font-size: 1.2em;
+  margin-top: -5px;
+  margin-bottom: 35px;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 35px;
+}
+
+.todo-input,
+.todo-textarea {
+  padding: 16px;
+  border: 2px solid var(--cinnamoroll-pink);
+  border-radius: 12px;
+  font-size: 1.05em;
+  font-family: 'Comfortaa', cursive;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background-color: #fcfcfc;
+  color: #555;
+
+  
+  width: 100%; /* Pastikan lebarnya 100% dari parent-nya */
+  box-sizing: border-box; /* Sangat penting agar padding/border tidak menambah lebar total */
+  min-height: 80px; /* Minimal tinggi agar terlihat seperti textarea */
+}
+
+/* Optional: Untuk text yang terlalu panjang, meskipun sudah ada word-wrap di judul */
+.todo-text .todo-title,
+.todo-text .todo-description {
+    word-break: break-word; /* Memastikan kata yang sangat panjang akan dipecah */
+    overflow-wrap: break-word; /* Alternatif untuk word-break */
+}
+
+.todo-input::placeholder,
+.todo-textarea::placeholder {
+  color: var(--cinnamoroll-dark-blue);
+  opacity: 0.6;
+}
+
+.todo-input:focus,
+.todo-textarea:focus {
+  outline: none;
+  border-color: var(--cinnamoroll-dark-blue);
+  box-shadow: 0 0 10px var(--cinnamoroll-shadow);
+}
+
+.add-button {
+  background-color: var(--cinnamoroll-dark-blue); /* Tombol biru gelap */
+  color: var(--cinnamoroll-white);
+  padding: 16px 28px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  font-family: 'Comfortaa', cursive;
+}
+
+.add-button:hover {
+  background-color: #584BBE; /* Sedikit lebih gelap saat hover */
+  transform: translateY(-3px);
+}
+
+.no-todos-message {
+  font-size: 1.3em;
+  color: var(--cinnamoroll-dark-blue);
+  margin-top: 50px;
+  font-family: 'Indie Flower', cursive;
+  animation: bounceIn 1.2s ease-out;
+  background-color: #e6f7ff; /* Latar belakang untuk pesan */
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px dashed var(--cinnamoroll-pink);
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  background-color: #FFFACD; /* Light Yellow (cream) for pending */
+  padding: 18px 25px;
+  margin-bottom: 18px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  position: relative;
+  border-left: 8px solid var(--cinnamoroll-pink); /* Garis pink di kiri */
+  animation: fadeIn 0.5s ease-out; /* Animasi saat muncul */
+}
+
+.todo-item.completed {
+  background-color: #E0FFFF; /* Light Cyan for completed */
+  border-left-color: var(--cinnamoroll-dark-blue); /* Garis biru gelap saat selesai */
+  opacity: 0.9;
+  text-decoration: line-through;
+  color: #616161;
+  animation: slideOutFade 0.6s ease-out forwards; /* Animasi saat selesai */
+}
+/* override text-decoration for specific elements if needed */
+.todo-item.completed .todo-status-icon,
+.todo-item.completed .delete-button {
+  text-decoration: none;
+}
+
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.todo-status-icon {
+  font-size: 2.2em; /* Ikon lebih besar */
+  margin-right: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+.todo-status-icon:hover {
+  transform: scale(1.15);
+}
+
+.pending-icon {
+    animation: bounce 1.5s infinite; /* Animasi ikon pending */
+}
+
+.completed-icon {
+    animation: tada 0.8s ease-out; /* Animasi ikon selesai */
+}
+
+.todo-text {
+  flex-grow: 1;
+}
+
+.todo-title {
+  margin: 0;
+  font-size: 1.4em;
+  color: var(--cinnamoroll-dark-blue);
+  cursor: pointer;
+  font-weight: 700;
+  word-wrap: break-word;
+  max-width: calc(100% - 20px);
+}
+
+.todo-item.completed .todo-title {
+  color: #616161;
+}
+
+.todo-description {
+  margin: 6px 0 0;
+  font-size: 1em;
+  color: #777;
+  word-wrap: break-word;
+}
+
+.todo-item.completed .todo-description {
+    color: #9e9e9e;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  font-size: 1.8em; /* Ikon delete lebih besar */
+  cursor: pointer;
+  color: #FF69B4; /* Hot Pink */
+  transition: transform 0.2s ease;
+  padding: 5px;
+  margin-left: 15px;
+}
+
+.delete-button:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Animations */
+@keyframes bounceIn {
+  0% { transform: scale(0.1); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideOutFade {
+  0% { transform: translateX(0); opacity: 1; }
+  50% { transform: translateX(10px); opacity: 0.5; }
+  100% { transform: translateX(20px); opacity: 0; display: none; }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-5px);}
+  60% {transform: translateY(-3px);}
+}
+
+@keyframes tada {
+  0% { transform: scale(1); }
+  10%, 20% { transform: scale(0.9) rotate(-3deg); }
+  30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+  40%, 60%, 80% { transform: scale(1.1) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 20px;
+    margin: 10px;
+  }
+  .app-header h1 {
+    font-size: 2em;
+  }
+  .add-button {
+    padding: 12px 20px;
+    font-size: 1em;
+  }
+  .todo-item {
+    padding: 12px 15px;
+    margin-bottom: 12px;
+  }
+  .todo-status-icon {
+    font-size: 1.8em;
+    margin-right: 10px;
+  }
+  .todo-title {
+    font-size: 1.2em;
+  }
+  .delete-button {
+    font-size: 1.3em;
+  }
+}
+
+/* frontend/src/App.css (Tambahan di bagian bawah) */
+
+.main-nav {
+  margin-top: 25px;
+  margin-bottom: 30px; /* Jarak antara navigasi dan konten */
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Jarak antar tombol navigasi */
+  flex-wrap: wrap; /* Untuk tampilan responsif */
+}
+
+.nav-button {
+  background-color: var(--cinnamoroll-pink); /* Warna pink manis */
+  color: var(--cinnamoroll-white);
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+  text-decoration: none; /* Hapus underline pada link */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button:hover {
+  background-color: #FF8BA6; /* Pink lebih gelap saat hover */
+  transform: translateY(-2px);
+}
+
+.page-title {
+  font-family: 'Patrick Hand', cursive;
+  color: var(--cinnamoroll-dark-blue);
+  font-size: 2.2em;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px var(--cinnamoroll-shadow);
+}
+
+/* Wrapper untuk konten halaman agar tetap di tengah */
+.page-content-wrapper {
+    padding: 20px;
+    background-color: var(--cinnamoroll-white); /* Warna background yang sama dengan app-container */
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Bayangan lebih ringan */
+    margin-top: 20px; /* Jarak dari header/nav */
+    border: 1px solid var(--cinnamoroll-grey); /* Border abu-abu halus */
+    box-sizing: border-box;
+}
+
+/* Pesan sukses/error */
+.message-box {
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  font-size: 1.1em;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.success-message {
+  background-color: #e6ffe6; /* Light green */
+  border: 2px solid #66bb6a; /* Green border */
+  color: #2e7d32; /* Dark green text */
+}
+
+.error-message {
+  background-color: #ffe6e6; /* Light red */
+  border: 2px solid #ef5350; /* Red border */
+  color: #c62828; /* Dark red text */
+}
+
+/* Untuk menampung loading message pada halaman daftar tugas */
+.loading-message {
+    font-size: 1.2em;
+    color: var(--cinnamoroll-dark-blue);
+    margin-top: 30px;
+    animation: bounceIn 1s ease-out;
+}
+
+/* Override slideOutFade for completed items if desired */
+.todo-item.completed {
+  /* Hapus atau modifikasi animation: slideOutFade jika tidak ingin item hilang */
+  animation: none; /* contoh: hapus animasi agar item tetap terlihat */
+  opacity: 0.7; /* tetap sedikit transparan */
+  /* Jika ingin item benar-benar hilang, biarkan animation: slideOutFade */
+}
